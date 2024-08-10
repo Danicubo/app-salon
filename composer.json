@@ -1,0 +1,19 @@
+{
+    "name": "danicubo/app-salon",
+    "description": "Proyecto PHP 8, MVC, SASS, Gulp, SQL",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "MVC\\" : "./",
+            "Controllers\\" : "./controllers",
+            "Model\\" : "./models"
+        }
+    },
+    "authors": [
+        {
+            "name": "Daniel Cuevas Botero",
+            "email": "danycubo2002@hotmail.com"
+        }
+    ],
+    "require": {}
+}
