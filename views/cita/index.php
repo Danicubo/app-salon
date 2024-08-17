@@ -4,19 +4,19 @@
 <div id="app">
         <nav class="tabs">
             <button class="actual" type="button" data-paso="1">Servicios</button>
-            <button type="button" data-paso="2">Infgormación Cita</button>
+            <button type="button" data-paso="2">Información Cita</button>
             <button type="button" data-paso="3">Resumen</button>
         </nav>
-    <div id="paso1" class="seccion">
+    <div id="paso-1" class="seccion">
         <h2>Servicios</h2>
         <p class="text-center">Elige tus servicios a continuación</p>
         <div id="servicios" class="listado-servicios">
 
         </div>
     </div>
-    <div id="paso2" class="seccion">
-        <h2>Servicios</h2>
-        <p class="text-center">Elige tus servicios a continuación</p>
+    <div id="paso-2" class="seccion">
+        <h2>Información Cita</h2>
+        <p class="text-center">Elige tus datos y cita</p>
         <form class="formulario">
             <div class="campo">
                 <label for="nombre">Nombre:</label>
@@ -43,9 +43,9 @@
             </div>
         </form>
     </div>
-    <div id="paso3" class="seccion">
+    <div id="paso-3" class="seccion">
         <h2>Resumen</h2>
-        <p>Verifica que la información sea correcta</p>
+        <p class="text-center">Verifica que la información sea correcta</p>
         <div id="servicios" class="listado-servicios">
 
         </div>
@@ -56,7 +56,7 @@
             class="boton"
         >&laquo; Anterior</button>
         <button
-            id="siguente"
+            id="siguiente"
             class="boton"
         >Siguiente &raquo;</button>
     </div>
