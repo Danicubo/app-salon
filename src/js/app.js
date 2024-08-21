@@ -21,6 +21,10 @@ function iniciarApp(){
     paginaAnterior();
 
     consultarAPI(); //Consulta la API en el backend de php
+
+    nombreCliente();//Añade el nombre de cliente al nombre de cita
+    seleccionarFecha(); //añade la fecha al objeto
+    seleccionarHora();
 }
 
 function tabs(){
@@ -130,7 +134,72 @@ function mostrarServicios(servicios) {
 }
 
 function seleccionarServicio(servicio){
+    const { id } = servicio;
     const { servicios } = cita;
-    cita.servicios = [...servicios, servicio]
-    console.log(cita)
+    //identificar el elemento que se le da click
+    const divServicio = document.querySelector(`[data-id-servicio="${id}"]`);
+
+    //comprobar si el servicio está seleccionado o no
+    if( servicios.some( agregado => agregado.id === id ) ){
+        //eliminarlo
+        cita.servicios = servicios.filter( agregado => agregado.id !== id);
+        divServicio.classList.remove('seleccionado');
+    } else {
+        //agregarlo
+        cita.servicios = [...servicios, servicio];
+        divServicio.classList.add('seleccionado');
+    }
+   
+}
+
+function nombreCliente() {
+    const nombre = document.querySelector('#nombre').value;
+    cita.nombre = nombre;
+}
+
+function seleccionarFecha(){
+    const inputFecha = document.querySelector('#fecha');
+    inputFecha.addEventListener('input', function(e){
+        const dia = new Date(e.target.value).getUTCDay();
+
+        if( [6, 0].includes(dia) ){
+            e.target.value = '';
+            mostrarAlerta('Fines de semana no permitidos', 'error');
+        }else {
+            cita.fecha = e.target.value;
+        }
+        
+    });
+}
+
+function seleccionarHora(){
+    const inputHora = document.querySelector('#hora');
+    inputHora.addEventListener('input', function(e){
+        const horaCita = e.target.value;
+        const hora = horaCita.split(":");
+        if(hora < 10 || hora > 18){
+            e.target.value = '';
+            mostrarAlerta('Hora no válida', 'error');
+        }else {
+            cita.hora = e.target.value;
+        }
+
+    })
+}
+
+function mostrarAlerta(mensaje, tipo){
+    const alertaPrevia = document.querySelector('.alerta');
+    if(alertaPrevia) return;
+    const alerta = document.createElement('DIV');
+    alerta.textContent = mensaje;
+    alerta.classList.add('alerta');
+    alerta.classList.add(tipo);
+
+    const formulario = document.querySelector('.formulario');
+    //Elimina la alerta
+    setTimeout(() => {
+        alerta.remove();
+    }, 3000);
+    formulario.appendChild(alerta);
+
 }
