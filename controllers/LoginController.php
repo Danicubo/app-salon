@@ -43,8 +43,11 @@ class LoginController {
             'alertas' => $alertas
         ]);
     }
-    public static function logout(){
-        echo "Desde Logout";
+    public static function logout(){ 
+        session_start();
+        $_SESSION = [];
+
+        header('Location: /');
     }
     public static function olvide(Router $router){
         $alertas = [];

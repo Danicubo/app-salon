@@ -131,6 +131,13 @@ class ActiveRecord {
         return array_shift( $resultado ) ;
     }
 
+    //Consulta plana de SQL(cuando los modelos no son suficientes)
+    public static function SQL($query) {
+        $resultado = self::consultarSQL($query);
+        return  $resultado;
+    }
+
+
     // crea un nuevo registro
     public function crear() {
         // Sanitizar los datos
@@ -139,9 +146,11 @@ class ActiveRecord {
         // Insertar en la base de datos
         $query = " INSERT INTO " . static::$tabla . " ( ";
         $query .= join(', ', array_keys($atributos));
-        $query .= " ) VALUES ('"; 
+        $query .= " ) VALUES (' "; 
         $query .= join("', '", array_values($atributos));
-        $query .= "') ";
+        $query .= " ') ";
+        
+        return json_encode( ['query' => $query] );
     
         // Resultado de la consulta
         $resultado = self::$db->query($query);
